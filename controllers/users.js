@@ -26,19 +26,43 @@ router.use(bodyParser.urlencoded({
 router.post('/', async (req, res) => {
     // using mongoDB(mongoose)  the spread operator is confusing me for one
     // then it looks like we need to seperate the req.body into password and the rest
+    const firstName = req.body.firstName
+    const lastName = req.body.lastName
+    const email = req.body.email
+    const password = req.body.password
+
     
-    let { password } = req.body
-    console.log("password: ", password)
+
+    //let { password, ...rest } = req.body
+    //let userObject = {}
+    //console.log("password: ", password)
     //console.log("...rest: ", rest)
     // then we need to create in db mongo a collection of data with both password and the rest
     // of the req.body or ...rest, I guess.
     // how to add both in mongoose to collection is the problem
 
-    let passwordD = await bcrypt.hash(password, 10)
-    console.log("passwordD: ", passwordD)
-    db2.User.create( { passwordDigest: "passwordD" })
+    let passwordDigest = await bcrypt.hash(password, 10)
+
+
+    const objectUser = new Object({
+        firstName,
+        lastName,
+        email,
+        passwordDigest
+    })
+
+
+    console.log(req.body)
+    console.log("hash:  " + passwordDigest)
+    db2.User.create(objectUser)
         .then((user) => {
-            res.json(user)
+            
+            console.log(user)
+            return res.json(user)
+
+        })
+        .catch(err => {
+            cosole.log("err",error)
         })
 })
 
@@ -56,15 +80,32 @@ router.get('/', (req, res) => {
 })
 
 
-// using postgress database
-//router.post('/', async (req, res) => {
-//    let { password, ...rest } = req.body;
-//    const user = await User.create({
-//        ...rest,
-//        passwordDigest: await bcrypt.hash(password, 10)
-//    })
-//    res.json(user)
-//})
+router.get('/:id', (req, res) => {
+
+    db2.User.findById(req.params.id)
+        .then(junkk => res.json(junkk))
+        .catch(err => res.status(400).json("Error: " + err))
+})
+
+router.put('/:id/update', (req, res) => {
+
+    let updates = req.body //we set a variable equal to the entire req.body
+    db2.User.findOneAndUpdate({ _id: req.params.id }, updates, { new: true })
+        .then(updatedJunk => res.json(updatedJunk))
+        .catch(err => res.status(400).json("Error: " + err))
+    
+})
+
+
+
+router.delete('/:id', (req, res) => {
+    db2.User.findByIdAndDelete(req.params.id)
+        .then(() => res.json("Junk deleted =("))
+        .catch(err => res.status(400).json("Error: " + err))
+})
+
+
+
 
 
 

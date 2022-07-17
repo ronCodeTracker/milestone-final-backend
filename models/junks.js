@@ -1,9 +1,12 @@
 
 const mongoose = require('mongoose')
 
+// creating shorthand for the Schema constructor 
+const { Schema } = mongoose 
 
 
-const junkSchema = new mongoose.Schema({
+
+const junkSchema = new Schema({
     name: {
         type: String,
         required: false
@@ -17,4 +20,11 @@ const junkSchema = new mongoose.Schema({
 })
 
 
-module.exports = mongoose.model('Junk', junkSchema)
+
+const Junk = mongoose.model('Junk', junkSchema)
+module.exports = Junk
+
+
+
+
+

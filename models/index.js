@@ -27,4 +27,4 @@ db3.once("open", function () {
 
 
 module.exports.Junk = require('./junks')
-
+module.exports.User = require('./users')
