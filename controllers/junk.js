@@ -66,7 +66,7 @@ router.get('/:junkId', (req, res) => {
 router.put('/:junkId', (req, res) => {
 
     let junkId = req.params.junkId
-
+    let updates = req.body
     if (!junkId) {
         res.json({ message: `no id found` })
     } else {
@@ -77,7 +77,7 @@ router.put('/:junkId', (req, res) => {
                 if (!id) {
                     res.status(404).json({ message: `Could not find place with id "${junkId}"` })
                 } else {
-                    db.Junk.findOneAndUpdate({ _id: req.params.junkId }, junkId, { new: true })
+                    db.Junk.findOneAndUpdate({ _id: req.params.junkId }, updates, { new: true })
                         .then(updatedJunk => res.json(updatedJunk))
                         .catch(err => res.status(400).json("Error: " + err))
                 }
