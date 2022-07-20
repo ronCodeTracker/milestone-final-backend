@@ -22,7 +22,7 @@ const cookieSession = require('cookie-session')
 //app.set('views', __dirname + '/views')
 
 app.set('view engine', 'jsx')
-app.engine('jsx', require('express-react-views').createEngine())
+//app.engine('jsx', require('express-react-views').createEngine())
 app.use(express.static('public'))
 
 app.use(cookieSession({
@@ -64,6 +64,6 @@ app.get('/', (req, res) => {
 
 
 //listen
-app.listen( 3000, () => {
+app.listen( 3000 || process.env.PORT, () => {
     console.log('nomming at port ' + PORT)
 })

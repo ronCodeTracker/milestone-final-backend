@@ -4,9 +4,9 @@ const mongoose = require('mongoose')
 
 console.log("mongo_uri: ", process.env.MONGO_URI)
 
-const mongoenv =  "mongodb+srv://bootcmpron:vcc333@clusterbootc.3unew.mongodb.net/junk-in-the-house"
+//const mongoenv =  "mongodb+srv://bootcmpron:vcc333@clusterbootc.3unew.mongodb.net/junk-in-the-house"
 
-mongoose.connect(mongoenv, {
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
