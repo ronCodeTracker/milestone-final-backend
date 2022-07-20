@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'junk-in-the-house-backend2'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9CE637C124F443ED98208416383B0E89 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8AB96927E8574DD6A2C78B6316AC4E03 }}
           package: .
