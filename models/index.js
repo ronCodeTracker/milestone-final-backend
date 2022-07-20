@@ -4,7 +4,9 @@ const mongoose = require('mongoose')
 
 console.log("mongo_uri: ", process.env.MONGO_URI)
 
-mongoose.connect(process.env.MONGO_URI, {
+const mongoenv =  "mongodb+srv://bootcmpron:vcc333@clusterbootc.3unew.mongodb.net/junk-in-the-house"
+
+mongoose.connect(mongoenv, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -28,3 +30,6 @@ db3.once("open", function () {
 
 module.exports.Junk = require('./junks')
 module.exports.User = require('./users')
+
+
+

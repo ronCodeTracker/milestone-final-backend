@@ -64,6 +64,6 @@ app.get('/', (req, res) => {
 
 
 //listen
-app.listen(PORT, () => {
+app.listen( 3000, () => {
     console.log('nomming at port ' + PORT)
 })
